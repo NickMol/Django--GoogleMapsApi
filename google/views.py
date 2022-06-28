@@ -18,7 +18,6 @@ def home(request):
 
 def geocode(request):
     clubs = FootballClubs.objects.all()
-
     context = {
         'clubs':clubs,
     }
