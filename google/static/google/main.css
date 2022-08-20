@@ -7,12 +7,21 @@
     width: 100%;
 }
 
+.title2{
+    color: white;
+}
+
+.title2:hover{
+    color: rgb(2, 0, 20);
+}
+
 .titleholder,
 .linkholder{
     display: flex;
     margin-top: 10px;
     width: 98%;
     border-radius: 5px;
+    justify-content: space-between;
 }
 .ourbutton{
     margin-right: 10px;

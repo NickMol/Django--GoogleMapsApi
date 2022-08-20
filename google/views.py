@@ -1,4 +1,5 @@
 import googlemaps
+import gmaps
 from datetime import datetime
 from django.shortcuts import render, redirect, reverse
 from .forms import *
@@ -47,3 +48,43 @@ def geocode_club(request,pk):
     else:
         return redirect('geocode')
     return render(request, 'google/empty.html',context)
+
+
+def distance(request):
+    gmaps = googlemaps.Client(key= settings.GOOGLE_API_KEY)
+    now = datetime.now()
+    calculate = json.dumps(gmaps.distance_matrix("Rat Verlegh Stadion",
+                            "Breda Station",
+                            mode="driving",
+                            departure_time=now)) 
+    calculate2 = json.loads(calculate)
+    
+    result = calculate2
+    distance = calculate2['rows'][0]['elements'][0]['distance']['value']
+    duration = calculate2['rows'][0]['elements'][0]['duration']['text']
+
+    context = {
+        'result':result,
+        'distance':distance,
+        'duration':duration
+    }
+    return render(request, 'google/distance.html',context)
+
+def calculate_distance(request,pk,pk2):
+    location1 = FootballClubs.objects.get(id=pk)
+    location2 = FootballClubs.objects.get(id=pk2)
+
+    result = FootballClubs.objects.all()
+    context = {
+        'result':result,
+    }
+    return render(request, 'google/distance.html',context)
+
+
+def map(request):
+    gmaps.configure(api_key=settings.GOOGLE_API_KEY)
+    result = gmaps.figure()
+    context = {
+        'result':result,
+    }
+    return render(request, 'google/map.html',context)
