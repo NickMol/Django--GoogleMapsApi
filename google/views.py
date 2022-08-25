@@ -82,9 +82,8 @@ def calculate_distance(request,pk,pk2):
 
 
 def map(request):
-    gmaps.configure(api_key=settings.GOOGLE_API_KEY)
-    result = gmaps.figure()
+    key = settings.GOOGLE_API_KEY
     context = {
-        'result':result,
+        'key':key,
     }
     return render(request, 'google/map.html',context)

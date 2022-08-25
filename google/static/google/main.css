@@ -100,3 +100,13 @@
   }
   
 .myTable2 tr:nth-child(even){background-color: #f9f8f8;}
+
+.mapholder{
+    height: 500px;
+    width: 100%;
+}
+
+#map {
+    height: 100%;
+  }
+  
