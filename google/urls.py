@@ -9,5 +9,6 @@ urlpatterns = [
 
    path('distance',view.distance, name="distance"),
    path('map',view.map, name="map"),
+   path('mydata',view.mydata, name="mydata"),
    path('calculate/distance/<int:pk>/<int:pk2>',view.calculate_distance, name="calculate_distance"),
 ]

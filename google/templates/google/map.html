@@ -2,17 +2,35 @@
 {% extends 'google/base.html' %}
 {% block content %}
 {% load static %}
-<script> 
-    let map;
-    function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-    });
-    }
-    window.initMap = initMap;
 
-</script>
+<script>
+
+    $(document).ready(function(){
+        $.ajax({
+            url: "{% url 'mydata'%}",
+            method: 'GET',
+            success: function (data) {
+                console.log(data);
+                initMap(data);
+            }
+      });
+    });
+
+    function initMap(data) {
+       const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 51.5944418, lng: 4.7492914}
+       });
+       const markers = data?.map((i) => {
+            const marker = new google.maps.Marker({
+                position: { lat: parseFloat(i.latitude), lng: parseFloat(i.longitude)},
+                map: map,
+            })
+        });
+
+     }
+  </script>
+
 
 <div class="pageholder">
     <div class="titleholder"> 
@@ -30,5 +48,7 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock content %}

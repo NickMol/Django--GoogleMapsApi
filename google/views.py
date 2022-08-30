@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import googlemaps
 import gmaps
 from datetime import datetime
@@ -87,3 +88,21 @@ def map(request):
         'key':key,
     }
     return render(request, 'google/map.html',context)
+
+
+def mydata(request):
+    result_list = list(FootballClubs.objects\
+                .exclude(latitude__isnull=True)\
+                .exclude(longitude__isnull=True)\
+                .exclude(latitude__exact='')\
+                .exclude(longitude__exact='')\
+                .values('id',
+                        'name', 
+                        'latitude',
+                        'longitude',
+                        'attendance',
+                        'stadium',
+                        'country',
+                        ))
+  
+    return JsonResponse(result_list, safe=False)
