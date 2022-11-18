@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'google.apps.GoogleConfig'
+    'googleApp.apps.GoogleappConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = '/google/static/'
 
-GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+GOOGLE_API_KEY = 'API_KEY'
 BASE_COUNTRY = 'NL'
 
 # Default primary key field type
